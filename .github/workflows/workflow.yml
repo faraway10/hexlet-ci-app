@@ -5,10 +5,11 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - name: setup
-      run: |
-      make setup
-      # - run: npm install
-      # - run: npm run build
-      # - run: npm test
-      # - run: npx eslint .
+      # Клонируем репозиторий
+      - uses: actions/checkout@v3
+      # Устанавливаем Node.js
+      - uses: actions/setup-node@v3
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+      - run: npx eslint .
