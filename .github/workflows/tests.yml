@@ -1,0 +1,26 @@
+name: tests
+run-name: ${{ github.actor }} is testing hexlet-ci-app tests 🚀
+on: [push]
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      # Клонируем репозиторий
+      - uses: actions/checkout@v3
+      # Устанавливаем Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'npm' # ускоряет повторные сборки
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+      - run: npx eslint .
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
