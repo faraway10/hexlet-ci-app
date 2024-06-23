@@ -2,10 +2,12 @@ name: workflow
 run-name: ${{ github.actor }} is testing hexlet-ci-app workflow 🚀
 on: [push]
 jobs:
-  job_0:
+  setup:
     runs-on: ubuntu-latest
     steps:
-      - run: make setup
+      - name: setup
+      run: |
+      make setup
       # - run: npm install
       # - run: npm run build
       # - run: npm test
